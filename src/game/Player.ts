@@ -1,18 +1,19 @@
-import Egg from './Egg';
-
 interface ISpriteParams {
     scene: Phaser.Scene;
     x: number; y: number;
     texture: string;
     frame?: string | number | undefined;
+    addEgg: (x: number, y: number) => void;
 }
 
 export default class Player {
     keys: Phaser.Input.Keyboard.CursorKeys;
     sprite: Phaser.Physics.Arcade.Sprite;
     scene: Phaser.Scene;
+    addEgg: (x: number, y: number) => void;
 
     constructor(config: ISpriteParams) {
+        this.addEgg = config.addEgg;
         this.scene = config.scene;
         this.sprite = config.scene.physics.add.sprite(100, 450, config.texture);
 
@@ -43,16 +44,7 @@ export default class Player {
             this.sprite.body.velocity.x = 0;
         }
         if (Phaser.Input.Keyboard.JustDown(this.keys.space!)) {
-            this.layEgg();
+            this.addEgg(this.sprite.x, this.sprite.y);
         }
-    }
-
-    layEgg = () => {
-        new Egg({
-            scene: this.scene,
-            x: this.sprite.x,
-            y: this.sprite.y,
-            texture: 'egg',
-        });
     }
 }

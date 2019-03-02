@@ -1,8 +1,10 @@
 import * as Phaser from 'phaser';
 import Player from './Player';
+import Egg from './Egg';
 
 export default class Scene extends Phaser.Scene {
     player: Player;
+    eggs: Egg[] = [];
 
     public preload() {
         this.load.tilemapTiledJSON('terrain', '/tilemap.json');
@@ -26,10 +28,23 @@ export default class Scene extends Phaser.Scene {
             x: 400,
             y: 300,
             texture: 'player',
+            addEgg: this.addEgg,
         });
     }
 
     public update() {
         this.player.update();
+        this.eggs.forEach(egg => egg.update());
+    }
+
+    public addEgg = (x: number, y: number) => {
+        const egg = new Egg({
+            x,
+            y,
+            scene: this,
+            texture: 'egg',
+        });
+        this.physics.add.collider(this.player.sprite, egg.sprite);
+        this.eggs.push(egg);
     }
 }
