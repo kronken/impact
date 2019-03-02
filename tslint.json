@@ -1,10 +1,45 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint-config-airbnb"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"
     ]
+  },
+  "rules": {
+    "ter-indent": [true, 4],
+    "no-trailing-whitespace": true,
+    "jsx-no-multiline-js": false,
+    "no-console": {
+      "severity": "warning"
+    },
+    "quotemark": [true, "single", "avoid-escape"],
+    "import-name": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
+    "origin-ordered-imports": [ true, "no-blank-lines" ],
+    "await-promise": true,
+    "only-arrow-functions": [true, "allow-declarations"],
+    "use-isnan": true,
+    "deprecation": true,
+    "member-ordering": [true, {
+      "order": [
+        "static-field",
+        "instance-field",
+        "constructor",
+        "instance-method",
+        "static-method"
+      ]
+    }],
+    "typedef-whitespace": true,
+    "no-implicit-dependencies": [true, ["~"]],
+    "no-object-literal-type-assertion": true,
+    "one-line": true
   }
 }
