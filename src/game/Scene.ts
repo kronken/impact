@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import Player from './player';
+import Player from './Player';
 
 export default class Scene extends Phaser.Scene {
     player: Player;
@@ -8,6 +8,7 @@ export default class Scene extends Phaser.Scene {
         this.load.tilemapTiledJSON('terrain', '/tilemap.json');
         this.load.image('tiles', '/images/OutdoorsTileset.png');
         this.load.image('player', '/images/mario.png');
+        this.load.image('egg', '/images/purple-egg.png');
     }
 
     public create() {
