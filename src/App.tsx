@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './game/main';
+import startGame from './game/main';
 
 interface IAppProps {}
 
@@ -181,6 +181,7 @@ export default class Scene extends Phaser.Scene {
 `}
             </div>
             <div id='game' className='' />
+            { this.state.isShowingGame && startGame() }
           </div>
         );
     }
