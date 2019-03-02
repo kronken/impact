@@ -5,6 +5,11 @@ import Egg from './Egg';
 export default class Scene extends Phaser.Scene {
     player: Player;
     eggs: Egg[] = [];
+    song: Phaser.Sound.BaseSound;
+
+    constructor() {
+        super('main');
+    }
 
     public preload() {
         this.load.tilemapTiledJSON('terrain', '/tilemap.json');
@@ -18,6 +23,7 @@ export default class Scene extends Phaser.Scene {
                 frameHeight: 64,
             },
         );
+        this.load.audio('theme', '/sounds/After-the-Invasion.mp3');
     }
 
     public create() {
@@ -51,11 +57,18 @@ export default class Scene extends Phaser.Scene {
             texture: 'player',
             addEgg: this.addEgg,
         });
+
+        this.song = this.sound.add('theme');
+        this.song.play();
     }
 
     public update() {
         this.player.update();
         this.eggs.forEach(egg => egg.update());
+
+        if (!this.song.isPlaying) {
+            this.gameOver();
+        }
     }
 
     public addEgg = (x: number, y: number) => {
@@ -67,5 +80,9 @@ export default class Scene extends Phaser.Scene {
         });
         this.physics.add.collider(this.player.sprite, egg.sprite);
         this.eggs.push(egg);
+    }
+
+    public gameOver = () => {
+        this.scene.start('gameOver');
     }
 }

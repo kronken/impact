@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
-import Scene from './Scene';
+import MainScene from './Scene';
+import GameOver from './GameOver';
 
 const config = {
     type: Phaser.AUTO,
@@ -10,7 +11,7 @@ const config = {
         default: 'arcade',
         arcade: {},
     },
-    scene: Scene,
+    scene: [MainScene, GameOver],
 };
 
 export default function start() {
