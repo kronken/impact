@@ -13,7 +13,8 @@ export default class Egg {
     constructor(config: ISpriteParams) {
         this.sprite = config.scene.physics.add.sprite(config.x, config.y, config.texture);
         this.sprite.setScale(.7);
-        this.sprite.setImmovable(true);
+        this.sprite.setBounce(1, 1);
+        this.sprite.setCollideWorldBounds(true);
     }
 
     public update() {
