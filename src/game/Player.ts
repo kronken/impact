@@ -3,10 +3,17 @@ import Egg from './Egg';
 
 const MOVEMENT_SPEED = 3;
 
+interface ISpriteParams {
+    scene: Phaser.Scene;
+    x: number; y: number;
+    texture: string;
+    frame?: string | number | undefined;
+}
+
 export default class Player extends Phaser.GameObjects.Sprite {
     keys: Phaser.Input.Keyboard.CursorKeys;
 
-    constructor(config:any) {
+    constructor(config: ISpriteParams) {
         super(config.scene, config.x, config.y, config.texture);
         config.scene.add.existing(this);
         this.setDepth(1);
