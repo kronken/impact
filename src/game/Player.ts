@@ -18,6 +18,7 @@ export default class Player {
         this.sprite = config.scene.physics.add.sprite(100, 450, config.texture);
 
         this.sprite.setCollideWorldBounds(true);
+        this.sprite.flipX = true;
         this.sprite.setDepth(1);
 
         this.keys = config.scene.input.keyboard.createCursorKeys();
@@ -35,9 +36,11 @@ export default class Player {
         } else if (this.keys.left!.isDown) {
             this.sprite.body.velocity.x = -vel;
             this.sprite.body.velocity.y = 0;
+            this.sprite.flipX = false;
         } else if (this.keys.right!.isDown) {
             this.sprite.body.velocity.x = vel;
             this.sprite.body.velocity.y = 0;
+            this.sprite.flipX = true;
         } else {
             this.sprite.body.velocity.y = 0;
             this.sprite.body.velocity.x = 0;
