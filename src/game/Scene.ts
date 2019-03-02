@@ -2,7 +2,7 @@ import * as Phaser from 'phaser';
 import Player from './player';
 
 export default class Scene extends Phaser.Scene {
-    player: Phaser.GameObjects.Image;
+    player: Player;
 
     public preload() {
         this.load.tilemapTiledJSON('terrain', '/tilemap.json');
