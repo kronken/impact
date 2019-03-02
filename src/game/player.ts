@@ -1,12 +1,16 @@
 import * as Phaser from 'phaser';
 
 class Player extends Phaser.GameObjects.Sprite {
+    keys: Phaser.Input.Keyboard.CursorKeys;
+
     constructor(config:any) {
         super(config.scene, config.x, config.y, config.texture);
         config.scene.add.existing(this);
+
+        this.keys = config.scene.input.keyboard.createCursorKeys();
     }
 
-    update = (keys:Phaser.Input.Keyboard.CursorKeys, velocity:integer) => {
+    public update(keys:Phaser.Input.Keyboard.CursorKeys, velocity:integer) {
         if (keys.left!.isDown) {
             this.setX(this.x - velocity);
         } else if (keys.right!.isDown) {
