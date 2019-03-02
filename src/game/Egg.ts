@@ -1,9 +1,22 @@
 import * as Phaser from 'phaser';
 
-export default class Egg extends Phaser.GameObjects.Sprite {
-    constructor(config:any) {
-        super(config.scene, config.x, config.y, config.texture);
-        config.scene.add.existing(this);
-        this.setScale(.7);
+interface ISpriteParams {
+    scene: Phaser.Scene;
+    x: number; y: number;
+    texture: string;
+    frame?: string | number | undefined;
+}
+
+export default class Egg {
+    sprite: Phaser.Physics.Arcade.Sprite;
+
+    constructor(config: ISpriteParams) {
+        this.sprite = config.scene.physics.add.sprite(config.x, config.y, config.texture);
+        this.sprite.setScale(.7);
+        this.sprite.setImmovable(true);
+    }
+
+    public update() {
+
     }
 }

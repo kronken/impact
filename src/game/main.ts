@@ -8,9 +8,7 @@ const config = {
     parent: 'game',
     physics: {
         default: 'arcade',
-        arcade: {
-            gravity: { y: 200 },
-        },
+        arcade: {},
     },
     scene: Scene,
 };
