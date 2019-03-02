@@ -1,7 +1,6 @@
 import * as Phaser from 'phaser';
 import Player from './player';
 
-
 export default class Scene extends Phaser.Scene {
     player: Phaser.GameObjects.Image;
     keys: Phaser.Input.Keyboard.CursorKeys;
