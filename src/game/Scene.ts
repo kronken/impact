@@ -26,7 +26,7 @@ export default class Scene extends Phaser.Scene {
             y: 300,
             texture: 'player',
         });
-        this.player.setScale(.2);
+        this.player.setScale(.1);
 
     }
 

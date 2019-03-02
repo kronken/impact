@@ -1,5 +1,7 @@
 import * as Phaser from 'phaser';
 
+const MOVEMENT_SPEED = 3;
+
 class Player extends Phaser.GameObjects.Sprite {
     keys: Phaser.Input.Keyboard.CursorKeys;
 
@@ -10,16 +12,16 @@ class Player extends Phaser.GameObjects.Sprite {
         this.keys = config.scene.input.keyboard.createCursorKeys();
     }
 
-    public update(keys:Phaser.Input.Keyboard.CursorKeys, velocity:integer) {
-        if (keys.left!.isDown) {
-            this.setX(this.x - velocity);
-        } else if (keys.right!.isDown) {
-            this.setX(this.x + velocity);
+    public update() {
+        if (this.keys.left!.isDown) {
+            this.setX(this.x - MOVEMENT_SPEED);
+        } else if (this.keys.right!.isDown) {
+            this.setX(this.x + MOVEMENT_SPEED);
         }
-        if (keys.up!.isDown) {
-            this.setY(this.y - velocity);
-        } else if (keys.down!.isDown) {
-            this.setY(this.y + velocity);
+        if (this.keys.up!.isDown) {
+            this.setY(this.y - MOVEMENT_SPEED);
+        } else if (this.keys.down!.isDown) {
+            this.setY(this.y + MOVEMENT_SPEED);
         }
     }
 }
