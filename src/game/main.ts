@@ -14,4 +14,6 @@ const config = {
     scene: [MainScene, GameOver],
 };
 
-new Phaser.Game(config);
+export default function start() {
+    new Phaser.Game(config);
+}
