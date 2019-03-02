@@ -3,56 +3,82 @@ body {
   padding: 0;
   font-family: sans-serif;
   background-color: black;
+  background-image: url("/images/matrix.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; 
+  width: 100vw;
+  height: 100vh;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+}
+
+.App-intro {
+  background-color: black;
+  margin: 0;
+  padding: 12px;
+  color: green;
+  text-align: center;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+#game {
+  position: fixed;
+  margin-left: -500px;
+  left: 50%;
+  top: 67px;
+  padding: 4px;
+  background-color: white;
+  border-radius: 4px;
 }
 
 canvas {
-  padding-left: 0;
-  padding-right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  margin-top: 75px;
+}
+
+.images {
+  margin: 0 auto;
+  width: 680px;
+}
+
+.images > img {
+  margin: 20px;
+}
+
+.content {
+  width: 1000px;
+  margin: 0 auto;
+  background-color: #7b8e01;
+  padding: 35px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  box-shadow: 0px 0px 15px black;
+}
+
+.header {
+
+
 }
 
 .code {
-  position: fixed;
-  top: 0;
-  font-size: 26px;
-  color: #757575;
-  z-index: -1;
-  background-color: black;
-
-}
-
-.nav {
-  position: fixed;
-  height: 50px;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #71bc23;
-}
-
-.nav p {
+  background-color: wheat;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 12px;
   color: black;
-  font-size: 30px;
-  line-height: 45px;
-  margin: 0;
-  text-align: center;
-  font-weight: 900;
+  white-space: pre;
 }
 
-.hidden {
-  z-index: 9;
-  position: fixed;
-  top: 0;
-  font-size: 26px;
-  color: #757575;
+.buttons {
+  text-align: right;
+}
+
+.card {
+  padding: 10px;
   background-color: black;
-}
-
-button {
-  position: fixed;
-  top: 0;
-  z-index: 999;
+  border-radius: 4px;
+  color: #8cdd0c;
+  margin-bottom: 10px;
 }

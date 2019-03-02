@@ -24,10 +24,42 @@ class App extends React.Component<IAppProps, IAppState> {
           <div className='App'>
             <div className='nav'>
                 <p className='App-intro'>
-                Impact!
+                { this.state.isShowingGame ? 'IMPACT!' : 'Hacker forum'}
                 </p>
             </div>
-            <div className={this.state.isShowingGame ? 'code' : 'hidden'}>
+            <div className='images'>
+                <img src='https://hackforums.net/uploads/mam/14.gif'/>
+                <img src='https://hackforums.net/uploads/mam/39.gif'/>
+            </div>
+            <div className='content'>
+                <div className='card'>
+                    <div className='header'>
+                        Hanne committed, 2.3.2019
+                    </div>
+                    <div className='code'>
+{`
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import App from './App';
+import './index.css';
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root') as HTMLElement,
+);
+
+`}
+                    </div>
+                    <div className='buttons'>
+                        <button onClick={this.toggle}>Try my game</button>
+                        <button>Respond</button>
+                    </div>
+                </div>
+                <div className='card'>
+                    <div className='header'>
+                        Joakim committed, 2.3.2019
+                    </div>
+                    <div className='code'>
 {`
 import * as Phaser from 'phaser';
 
@@ -61,22 +93,19 @@ export default class Egg {
         }
     }
 }
-import * as Phaser from 'phaser';
-import Scene from './Scene';
-
-const config = {
-    type: Phaser.AUTO,
-    width: 992,
-    height: 800,
-    parent: 'game',
-    physics: {
-        default: 'arcade',
-        arcade: {},
-    },
-    scene: Scene,
-};
-
-new Phaser.Game(config);
+`}
+                    </div>
+                    <div className='buttons'>
+                        <button onClick={this.toggle}>Try my game</button>
+                        <button>Respond</button>
+                    </div>
+                </div>
+                <div className='card'>
+                    <div className='header'>
+                        Hanne committed, 2.3.2019
+                    </div>
+                    <div className='code'>
+{`
 interface ISpriteParams {
     scene: Phaser.Scene;
     x: number; y: number;
@@ -97,13 +126,13 @@ export default class Player {
         this.sprite = config.scene.physics.add.sprite(100, 450, config.texture);
 
         this.sprite.setCollideWorldBounds(true);
-        this.sprite.setScale(0.1);
+        this.sprite.flipX = true;
         this.sprite.setDepth(1);
 
         this.keys = config.scene.input.keyboard.createCursorKeys();
     }
 
-    public `}<span onClick={this.toggle}>update</span>{`() {
+    public update() {
         const vel = 100;
 
         if (this.keys.down!.isDown) {
@@ -115,18 +144,48 @@ export default class Player {
         } else if (this.keys.left!.isDown) {
             this.sprite.body.velocity.x = -vel;
             this.sprite.body.velocity.y = 0;
+            this.sprite.flipX = false;
         } else if (this.keys.right!.isDown) {
             this.sprite.body.velocity.x = vel;
             this.sprite.body.velocity.y = 0;
+            this.sprite.flipX = true;
         } else {
             this.sprite.body.velocity.y = 0;
             this.sprite.body.velocity.x = 0;
         }
+
+        if (Phaser.Input.Keyboard.JustDown(this.keys.up!)
+            || Phaser.Input.Keyboard.JustDown(this.keys.down!)
+            || Phaser.Input.Keyboard.JustDown(this.keys.left!)
+            || Phaser.Input.Keyboard.JustDown(this.keys.right!)) {
+            this.sprite.anims.play('walk');
+        }
+
+        if (Phaser.Input.Keyboard.JustUp(this.keys.up!)
+        || Phaser.Input.Keyboard.JustUp(this.keys.down!)
+        || Phaser.Input.Keyboard.JustUp(this.keys.left!)
+        || Phaser.Input.Keyboard.JustUp(this.keys.right!)) {
+            this.sprite.anims.play('idle');
+        }
+
         if (Phaser.Input.Keyboard.JustDown(this.keys.space!)) {
             this.addEgg(this.sprite.x, this.sprite.y);
         }
     }
 }
+`}
+                    </div>
+                    <div className='buttons'>
+                        <button onClick={this.toggle}>Try my game</button>
+                        <button>Respond</button>
+                    </div>
+                </div>
+                <div className='card'>
+                    <div className='header'>
+                        Joakim committed, 2.3.2019
+                    </div>
+                    <div className='code'>
+{`
 import * as Phaser from 'phaser';
 import Player from './Player';
 import Egg from './Egg';
@@ -138,8 +197,15 @@ export default class Scene extends Phaser.Scene {
     public preload() {
         this.load.tilemapTiledJSON('terrain', '/tilemap.json');
         this.load.image('tiles', '/images/OutdoorsTileset.png');
-        this.load.image('player', '/images/mario.png');
         this.load.image('egg', '/images/purple-egg.png');
+        this.load.spritesheet(
+            'player',
+            '/images/duck-sprite.png',
+            {
+                frameWidth: 64,
+                frameHeight: 64,
+            },
+        );
     }
 
     public create() {
@@ -151,6 +217,20 @@ export default class Scene extends Phaser.Scene {
         map.createStaticLayer('Tile Layer 1', tileset, 0, 0).setScale(2);
         map.createStaticLayer('Tile Layer 2', tileset, 0, 0).setScale(2);
         map.createStaticLayer('Tile Layer 3', tileset, 0, 0).setScale(2);
+
+        this.anims.create({
+            key: 'walk',
+            frames: this.anims.generateFrameNumbers('player', { start: 5, end: 11 }),
+            frameRate: 10,
+            repeat: -1,
+        });
+
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 4 }),
+            frameRate: 10,
+            repeat: -1,
+        });
 
         this.player = new Player({
             scene: this,
@@ -179,6 +259,12 @@ export default class Scene extends Phaser.Scene {
 }
 
 `}
+                    </div>
+                    <div className='buttons'>
+                        <button onClick={this.toggle}>Try my game</button>
+                        <button>Respond</button>
+                    </div>
+                </div>
             </div>
             <div id='game' className='' />
             { this.state.isShowingGame && startGame() }
