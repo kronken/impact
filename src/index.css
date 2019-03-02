@@ -30,15 +30,16 @@ canvas {
   top: 0;
   left: 0;
   right: 0;
-  background-color: blue;
+  background-color: #71bc23;
 }
 
 .nav p {
-  color: #ff7a00;
-    font-size: 30px;
-    margin: 0;
-    text-align: center;
-    font-weight: 900;
+  color: black;
+  font-size: 30px;
+  line-height: 45px;
+  margin: 0;
+  text-align: center;
+  font-weight: 900;
 }
 
 .hidden {
