@@ -1,7 +1,4 @@
-import * as Phaser from 'phaser';
 import Egg from './Egg';
-
-const MOVEMENT_SPEED = 3;
 
 interface ISpriteParams {
     scene: Phaser.Scene;
@@ -10,27 +7,40 @@ interface ISpriteParams {
     frame?: string | number | undefined;
 }
 
-export default class Player extends Phaser.GameObjects.Sprite {
+export default class Player {
     keys: Phaser.Input.Keyboard.CursorKeys;
+    sprite: Phaser.Physics.Arcade.Sprite;
+    scene: Phaser.Scene;
 
     constructor(config: ISpriteParams) {
-        super(config.scene, config.x, config.y, config.texture);
-        config.scene.add.existing(this);
-        this.setDepth(1);
+        this.scene = config.scene;
+        this.sprite = config.scene.physics.add.sprite(100, 450, config.texture);
+
+        this.sprite.setCollideWorldBounds(true);
+        this.sprite.setScale(0.1);
+        this.sprite.setDepth(1);
 
         this.keys = config.scene.input.keyboard.createCursorKeys();
     }
 
     public update() {
-        if (this.keys.left!.isDown) {
-            this.setX(this.x - MOVEMENT_SPEED);
+        const vel = 100;
+
+        if (this.keys.down!.isDown) {
+            this.sprite.body.velocity.y = vel;
+            this.sprite.body.velocity.x = 0;
+        } else if (this.keys.up!.isDown) {
+            this.sprite.body.velocity.y = -vel;
+            this.sprite.body.velocity.x = 0;
+        } else if (this.keys.left!.isDown) {
+            this.sprite.body.velocity.x = -vel;
+            this.sprite.body.velocity.y = 0;
         } else if (this.keys.right!.isDown) {
-            this.setX(this.x + MOVEMENT_SPEED);
-        }
-        if (this.keys.up!.isDown) {
-            this.setY(this.y - MOVEMENT_SPEED);
-        } else if (this.keys.down!.isDown) {
-            this.setY(this.y + MOVEMENT_SPEED);
+            this.sprite.body.velocity.x = vel;
+            this.sprite.body.velocity.y = 0;
+        } else {
+            this.sprite.body.velocity.y = 0;
+            this.sprite.body.velocity.x = 0;
         }
         if (Phaser.Input.Keyboard.JustDown(this.keys.space!)) {
             this.layEgg();
@@ -40,8 +50,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     layEgg = () => {
         new Egg({
             scene: this.scene,
-            x: this.x,
-            y: this.y,
+            x: this.sprite.x,
+            y: this.sprite.y,
             texture: 'egg',
         });
     }
