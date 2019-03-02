@@ -22,6 +22,11 @@ class App extends React.Component<IAppProps, IAppState> {
     public render() {
         return (
           <div className='App'>
+            <div className='ribbon-wrapper mobile-remove'>
+                <div className='ribbon'>
+                    <a>Join Today</a>
+                </div>
+            </div>
             <div className='nav'>
                 <p className='App-intro'>
                 { this.state.isShowingGame ? 'IMPACT!' : 'Hacker forum'}
