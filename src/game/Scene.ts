@@ -1,9 +1,8 @@
 import * as Phaser from 'phaser';
-import Player from './player';
+import Player from './Player';
 
 export default class Scene extends Phaser.Scene {
     player: Phaser.GameObjects.Image;
-    keys: Phaser.Input.Keyboard.CursorKeys;
 
     public preload() {
         this.load.tilemapTiledJSON('terrain', '/tilemap.json');
@@ -28,12 +27,11 @@ export default class Scene extends Phaser.Scene {
             y: 300,
             texture: 'player',
         });
-        this.player.setScale(.2);
+        this.player.setScale(.1);
 
-        this.keys = this.input.keyboard.createCursorKeys();
     }
 
     public update() {
-        this.player.update(this.keys, 3);
+        this.player.update();
     }
 }
