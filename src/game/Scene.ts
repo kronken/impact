@@ -6,6 +6,8 @@ export default class Scene extends Phaser.Scene {
     player: Player;
     eggs: Egg[] = [];
     song: Phaser.Sound.BaseSound;
+    timerText: Phaser.GameObjects.Text;
+    gameEndTime: Date;
 
     constructor() {
         super('main');
@@ -24,6 +26,12 @@ export default class Scene extends Phaser.Scene {
             },
         );
         this.load.audio('theme', '/sounds/After-the-Invasion.mp3');
+        this.timerText = this.add.text(20, 20, '')
+            .setFontSize(40)
+            .setFontFamily('sans-serif')
+            .setColor('red')
+            .setOrigin(0);
+        this.timerText.setDepth(2);
     }
 
     public create() {
@@ -60,13 +68,20 @@ export default class Scene extends Phaser.Scene {
 
         this.song = this.sound.add('theme');
         this.song.play();
+        const timerDuration = this.song.totalDuration * 1000;
+        this.gameEndTime = new Date();
+        this.gameEndTime.setTime(this.gameEndTime.getTime() + timerDuration);
     }
 
     public update() {
         this.player.update();
         this.eggs.forEach(egg => egg.update());
 
-        if (!this.song.isPlaying) {
+        if (this.song.isPlaying) {
+            const timeUntilEnd = this.gameEndTime.getTime() - (new Date()).getTime();
+            const secondsUntilEnd = Math.floor(timeUntilEnd / 1000);
+            this.timerText.setText(this.secondsToMinutesAndSeconds(secondsUntilEnd));
+        } else {
             this.gameOver();
         }
     }
@@ -84,5 +99,11 @@ export default class Scene extends Phaser.Scene {
 
     public gameOver = () => {
         this.scene.start('gameOver');
+    }
+
+    secondsToMinutesAndSeconds = (seconds:integer) => {
+        const remainderSeconds = seconds % 60;
+        return (seconds - remainderSeconds)
+        / 60 + (9 < remainderSeconds ? ':' : ':0') + remainderSeconds;
     }
 }
