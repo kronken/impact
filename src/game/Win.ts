@@ -1,16 +1,16 @@
 import * as Phaser from 'phaser';
 
-export default class GameOver extends Phaser.Scene {
-    gameOverText: Phaser.GameObjects.Text;
+export default class Win extends Phaser.Scene {
+    winText: Phaser.GameObjects.Text;
     constructor() {
-        super('gameOver');
+        super('win');
     }
     public preload() {
-        this.gameOverText =
+        this.winText =
         this.add.text(
             476,
             400,
-            'GAME OVER',
+            'YOU WIN!',
             {
                 fontFamily: 'sans-serif',
                 fontSize: '80px',
@@ -18,10 +18,10 @@ export default class GameOver extends Phaser.Scene {
                 align: 'center',
             },
         ).setOrigin(0.5);
-        this.gameOverText.setDepth(1);
+        this.winText.setDepth(1);
     }
 
     public create() {
-        this.cameras.main.setBackgroundColor('#000000');
+        this.cameras.main.setBackgroundColor('#7473BD');
     }
 }
