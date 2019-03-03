@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as Phaser from 'phaser';
 import * as ReactDOM from 'react-dom';
-import './index.css';
 
 interface IEggParams {
     scene: Phaser.Scene;
@@ -322,6 +321,136 @@ class App extends React.Component<IAppProps, IAppState> {
     public render() {
         return (
           <div className='App'>
+<style>
+{`
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: black;
+  background-image: url("/images/matrix.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+}
+
+.App-intro {
+  background-color: black;
+  margin: 0;
+  padding: 12px;
+  color: green;
+  text-align: center;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+#game {
+  position: fixed;
+  margin-left: -500px;
+  left: 50%;
+  top: 67px;
+}
+
+canvas {
+}
+
+.images {
+  margin: 0 auto;
+  width: 680px;
+}
+
+.images > img {
+  margin: 20px;
+}
+
+.content {
+  width: 1000px;
+  margin: 0 auto;
+  background-color: #7b8e01;
+  padding: 35px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  box-shadow: 0px 0px 15px black;
+}
+
+.header {
+
+
+}
+
+.code {
+  background-color: wheat;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 12px;
+  color: black;
+  white-space: pre;
+}
+
+.buttons {
+  text-align: right;
+}
+
+.card {
+  padding: 10px;
+  background-color: black;
+  border-radius: 4px;
+  color: #8cdd0c;
+  margin-bottom: 10px;
+}
+
+.ribbon-wrapper {
+  width: 110px;
+  height: 120px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+
+.ribbon {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  position: relative;
+  padding: 15px 0;
+  left: -5px;
+  top: 15px;
+  width: 160px;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top, #36d900, #00b360);
+  background-image: -moz-linear-gradient(top, #36d900, #00b360);
+  background-image: -ms-linear-gradient(top, #36d900, #00b360);
+  background-image: -o-linear-gradient(top, #36d900, #00b360);
+  color: #fff;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.credits {
+  height: 50px;
+  width: 200px;
+  position: fixed;
+  right: 0;
+  font-size: 17px;
+  color: #ff002d;
+  bottom: 0;
+  font-weight: 900;
+}
+`}
+</style>
             <div className='ribbon-wrapper mobile-remove'>
                 <div className='ribbon'>
                     <a>Join Today</a>
@@ -570,6 +699,10 @@ export default class Scene extends Phaser.Scene {
             </div>
             <div id='game' className='' />
             { this.state.isShowingGame && start() }
+            <div className='credits'>
+              Music by Eric Matyas
+              www.soundimage.org
+            </div>
           </div>
         );
     }
