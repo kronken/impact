@@ -8,15 +8,20 @@ export default class Scene extends Phaser.Scene {
     song: Phaser.Sound.BaseSound;
     timerText: Phaser.GameObjects.Text;
     gameEndTime: Date;
+    eggTexture: string;
+    hasWon: boolean;
 
     constructor() {
         super('main');
+        this.eggTexture = 'blackEgg';
+        this.hasWon = false;
     }
 
     public preload() {
         this.load.tilemapTiledJSON('terrain', '/tilemap.json');
         this.load.image('tiles', '/images/OutdoorsTileset.png');
-        this.load.image('egg', '/images/purple-egg.png');
+        this.load.image('purpleEgg', '/images/purple-egg.png');
+        this.load.image('blackEgg', '/images/black-egg.png');
         this.load.spritesheet(
             'player',
             '/images/duck-sprite.png',
@@ -91,7 +96,7 @@ export default class Scene extends Phaser.Scene {
             x,
             y,
             scene: this,
-            texture: 'egg',
+            texture: this.eggTexture,
         });
         this.physics.add.collider(this.player.sprite, egg.sprite);
         this.eggs.push(egg);
@@ -99,6 +104,12 @@ export default class Scene extends Phaser.Scene {
 
     public gameOver = () => {
         this.scene.start('gameOver');
+    }
+
+    public setEggsPurple = () => {
+        this.eggTexture = 'purpleEgg';
+        this.hasWon = true;
+        this.eggs.forEach(egg => egg.setAsPurple());
     }
 
     secondsToMinutesAndSeconds = (seconds:integer) => {

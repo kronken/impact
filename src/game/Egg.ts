@@ -29,4 +29,8 @@ export default class Egg {
             this.wasRotated = new Date();
         }
     }
+
+    public setAsPurple() {
+        this.sprite.setTexture('purpleEgg');
+    }
 }
