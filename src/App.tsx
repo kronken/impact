@@ -29,7 +29,7 @@ class App extends React.Component<IAppProps, IAppState> {
             </div>
             <div className='nav'>
                 <p className='App-intro'>
-                { this.state.isShowingGame ? 'IMPACT!' : 'Hacker forum'}
+                { this.state.isShowingGame ? 'MAKE AN IMPACT!' : 'Hacker forum'}
                 </p>
             </div>
             <div className='images'>
@@ -56,8 +56,7 @@ ReactDOM.render(
 `}
                     </div>
                     <div className='buttons'>
-                        <button onClick={this.toggle}>Try my game</button>
-                        <button>Respond</button>
+                        <button onClick={this.toggle}>Comment</button>
                     </div>
                 </div>
                 <div className='card'>
@@ -101,8 +100,7 @@ export default class Egg {
 `}
                     </div>
                     <div className='buttons'>
-                        <button onClick={this.toggle}>Try my game</button>
-                        <button>Respond</button>
+                        <button onClick={this.toggle}>Comment</button>
                     </div>
                 </div>
                 <div className='card'>
@@ -181,8 +179,7 @@ export default class Player {
 `}
                     </div>
                     <div className='buttons'>
-                        <button onClick={this.toggle}>Try my game</button>
-                        <button>Respond</button>
+                        <button onClick={this.toggle}>Comment</button>
                     </div>
                 </div>
                 <div className='card'>
@@ -266,8 +263,7 @@ export default class Scene extends Phaser.Scene {
 `}
                     </div>
                     <div className='buttons'>
-                        <button onClick={this.toggle}>Try my game</button>
-                        <button>Respond</button>
+                        <button onClick={this.toggle}>Comment</button>
                     </div>
                 </div>
             </div>
