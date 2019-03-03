@@ -103,7 +103,11 @@ export default class Scene extends Phaser.Scene {
     }
 
     public gameOver = () => {
-        this.scene.start('gameOver');
+        if (this.hasWon) {
+            this.scene.start('win');
+        } else {
+            this.scene.start('gameOver');
+        }
     }
 
     public setEggsPurple = () => {

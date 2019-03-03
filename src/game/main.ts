@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import MainScene from './Scene';
 import GameOver from './GameOver';
+import Win from './Win';
 
 const config = {
     type: Phaser.AUTO,
@@ -11,7 +12,7 @@ const config = {
         default: 'arcade',
         arcade: {},
     },
-    scene: [MainScene, GameOver],
+    scene: [MainScene, GameOver, Win],
 };
 
 let game: Phaser.Game;
