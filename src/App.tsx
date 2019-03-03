@@ -1,5 +1,5 @@
 import * as React from 'react';
-import startGame from './game/main';
+import { start, win } from './game/main';
 
 interface IAppProps {}
 
@@ -29,7 +29,8 @@ class App extends React.Component<IAppProps, IAppState> {
             </div>
             <div className='nav'>
                 <p className='App-intro'>
-                { this.state.isShowingGame ? 'MAKE AN IMPACT!' : 'Hacker forum'}
+                { this.state.isShowingGame
+                    ? <span onClick={win}>Make an Impact!</span> : 'Hacker forum'}
                 </p>
             </div>
             <div className='images'>
@@ -268,7 +269,7 @@ export default class Scene extends Phaser.Scene {
                 </div>
             </div>
             <div id='game' className='' />
-            { this.state.isShowingGame && startGame() }
+            { this.state.isShowingGame && start() }
           </div>
         );
     }

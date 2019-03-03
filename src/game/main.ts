@@ -14,6 +14,17 @@ const config = {
     scene: [MainScene, GameOver],
 };
 
-export default function start() {
-    new Phaser.Game(config);
+let game: Phaser.Game;
+
+function start() {
+    game = new Phaser.Game(config);
 }
+
+function win() {
+    game.scene.getScene('main')['setEggsPurple']();
+}
+
+export {
+    start,
+    win,
+};
